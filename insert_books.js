@@ -196,3 +196,33 @@ insertBooks().catch(console.error);
  * 5. Find in-stock books:
  *    db.books.find({ in_stock: true })
  */ 
+// Task 3
+// Find books that are instock and published after 2010
+db.books.find(
+  { in_stock: true, published_year: { $gt: 2010 } },
+  { _id: 0, title: 1, author: 1, price: 1 }
+)
+// Sort results by price in ascending order
+db.books.find(
+  { in_stock: true, published_year: { $gt: 2010 } },
+  { _id: 0, title: 1, author: 1, price: 1 }
+).sort({ price: 1 })  // Ascending order
+// Sort results by price in descending order
+db.books.find(
+  { in_stock: true, published_year: { $gt: 2010 } },
+  { _id: 0, title: 1, author: 1, price: 1 }
+).sort({ price: -1 })  // Descending order
+// Pagination,show 5 books per page
+// Page 1
+db.books.find(
+  { in_stock: true, published_year: { $gt: 2010 } },
+  { _id: 0, title: 1, author: 1, price: 1 }
+).sort({ price: 1 }).limit(5).skip(0)
+// Page 2
+db.books.find(
+  { in_stock: true, published_year: { $gt: 2010 } },
+  { _id: 0, title: 1, author: 1, price: 1 }
+).sort({ price: 1 }).limit(5).skip(5)
+// Formulae for skip
+skip = (page_number - 1) * page_size
+
